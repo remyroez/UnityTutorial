@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayableBallController : MonoBehaviour, IPlayable
+public class PlayableBallController : MonoBehaviour, IPlayableHandler
 {
     public void Move (float x, float z)
     {

@@ -14,10 +14,10 @@ public class PlayerController : MonoBehaviour {
             float z = Input.GetAxis("Vertical");
             if ((Mathf.Abs(x) > Mathf.Epsilon) || (Mathf.Abs(z) > Mathf.Epsilon))
             {
-                ExecuteEvents.Execute<IPlayable>(
+                ExecuteEvents.Execute<IPlayableHandler>(
                     target,
                     null,
-                    (reciever, data) => reciever.Move(x, z)
+                    (handler, data) => handler.Move(x, z)
                 );
             }
         }
