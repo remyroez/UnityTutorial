@@ -8,6 +8,8 @@ public class ScoreHandler : MonoBehaviour, IScoreHandler
     
     protected int score = 0;
 
+    protected int maxScore = 5;
+
     public void OnTriggerEnterItem(GameObject target, Collider hit)
     {
         if (hit.CompareTag("Player"))
@@ -16,6 +18,19 @@ public class ScoreHandler : MonoBehaviour, IScoreHandler
             Destroy(target);
 
             UpdateScore();
+            CheckClear();
+        }
+    }
+
+    public void CheckClear()
+    {
+        if (score >= maxScore)
+        {
+            ExecuteEvents.Execute<IGameHandler>(
+                gameObject,
+                null,
+                (handler, data) => handler.Next()
+            );
         }
     }
 
