@@ -17,6 +17,11 @@ public class GameHandler : MonoBehaviour, IGameHandler
         nextFlow = true;
     }
 
+    public void Reboot()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
     // Use this for initialization
     void Start ()
     {
@@ -42,6 +47,7 @@ public class GameHandler : MonoBehaviour, IGameHandler
             nextFlow = false;
             yield return StartCoroutine(flow);
         }
+        Reboot();
     }
 
     IEnumerator Flow(GameObject[] objects, CheckFunction checker = null)
