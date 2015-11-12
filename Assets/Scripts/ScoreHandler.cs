@@ -10,15 +10,47 @@ public class ScoreHandler : MonoBehaviour, IScoreHandler
 
     protected int maxScore = 5;
 
+    protected bool isScoring = false;
+
+    public void Begin()
+    {
+        isScoring = true;
+    }
+
+    public void End()
+    {
+        isScoring = false;
+    }
+
     public void OnTriggerEnterItem(GameObject target, Collider hit)
     {
-        if (hit.CompareTag("Player"))
+        if (!isScoring)
+        {
+            // 
+        }
+        else if (hit.CompareTag("Player"))
         {
             score += 1;
             Destroy(target);
 
             UpdateScore();
             CheckClear();
+        }
+    }
+
+    public void OnCollisionEnterObstacle(GameObject target, Collision hit)
+    {
+        if (!isScoring)
+        {
+            // 
+        }
+        else if (hit.gameObject.CompareTag("Player"))
+        {
+            ExecuteEvents.Execute<IGameHandler>(
+                gameObject,
+                null,
+                (handler, data) => handler.Reboot()
+            );
         }
     }
 
